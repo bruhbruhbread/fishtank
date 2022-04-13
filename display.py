@@ -11,7 +11,6 @@ class display:
 
         self.visible_sprites = yuhGroup()
         self.obstacle_sprites = pygame.sprite.Group()
-        self.food = Food
 
         self.create_map()
 
@@ -21,9 +20,9 @@ class display:
                 x = col_index * TILESIZE
                 y = row_index * TILESIZE
                 if col == 'g':
-                    Fish((x, y), [self.visible_sprites])
+                    self.fish = Fish((x, y), [self.visible_sprites])
                 elif col == 'y':
-                    Food((x, y), [self.visible_sprites])
+                    self.food = Food((x, y), [self.visible_sprites])
 
     def run(self):
         self.visible_sprites.draw(self.display_surface)

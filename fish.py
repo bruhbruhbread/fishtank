@@ -1,5 +1,6 @@
 import pygame
 from settings import *
+from food import Food
 
 
 class Fish(pygame.sprite.Sprite):
@@ -12,13 +13,13 @@ class Fish(pygame.sprite.Sprite):
         self.direction = pygame.math.Vector2()
         self.speed = 5
 
-        self.notice_distance = 400
+        self.notice_distance = 500000
 
         self.status = 'idle'
 
     def get_food_distance_direction(self, food):
         fish_vec = pygame.math.Vector2(self.rect.center)
-        food_vec = pygame.math.Vector2(200, 300)
+        food_vec = pygame.math.Vector2(food.rect.center)
         distance = (food_vec - fish_vec).magnitude()
 
         if distance > 0:
@@ -37,7 +38,7 @@ class Fish(pygame.sprite.Sprite):
     def get_status(self, food):
         distance = self.get_food_distance_direction(food)[0]
 
-        if distance > self.notice_distance:
+        if distance <= self.notice_distance:
             self.status = 'move'
 
     def move(self, speed):
