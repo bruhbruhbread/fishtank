@@ -22,12 +22,20 @@ class display:
                 if col == 'g':
                     self.fish = Fish((x, y), [self.visible_sprites])
                 elif col == 'y':
-                    self.food = Food((x, y), [self.visible_sprites])
+                    self.food = Food((x, y), [self.visible_sprites, self.obstacle_sprites])
+
+    def fish_eat_logic(self):
+        if self.fish:
+            collision_sprites = pygame.sprite.spritecollide(self.fish, self.obstacle_sprites, True)
+            if collision_sprites:
+                for target_sprite in collision_sprites:
+                    target_sprite.kill()
 
     def run(self):
         self.visible_sprites.draw(self.display_surface)
         self.visible_sprites.update()
         self.visible_sprites.fish_update(self.food)
+        self.fish_eat_logic()
 
 
 class yuhGroup(pygame.sprite.Group):
