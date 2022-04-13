@@ -18,7 +18,7 @@ class Fish(pygame.sprite.Sprite):
 
     def get_food_distance_direction(self, food):
         fish_vec = pygame.math.Vector2(self.rect.center)
-        food_vec = pygame.math.Vector2(food.rect.center)
+        food_vec = pygame.math.Vector2(200, 300)
         distance = (food_vec - fish_vec).magnitude()
 
         if distance > 0:
@@ -29,7 +29,6 @@ class Fish(pygame.sprite.Sprite):
         return distance, direction
 
     def actions(self, food):
-        print(self.status)
         if self.status == 'move':
             self.direction = self.get_food_distance_direction(food)[1]
         else:
